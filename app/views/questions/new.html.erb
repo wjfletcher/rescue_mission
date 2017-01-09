@@ -1,0 +1,31 @@
+<h1>Submit a new qusson below!</h1>
+
+<%= form_for(@question) do |f| %>
+  <div class="field">
+    <%= f.label :title %> <br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %> <br />
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %> <br />
+    <%= f.number_field :user_id, min: 1 %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Question list", questions_path %>
+
+<% if @errors %>
+  <% @errors.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
