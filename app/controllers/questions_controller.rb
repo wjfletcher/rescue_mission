@@ -31,12 +31,11 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect to @question, notice: 'Question was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    if Question.update(question_params)
+      @question = Question.find(params[:id])
+      redirect_to @question, notice: 'Question was successfully updated.'
+    else
+      render :edit
     end
   end
 
