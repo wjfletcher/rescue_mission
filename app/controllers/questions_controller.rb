@@ -5,6 +5,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @answer = Answer.new(question_id: @question)
+    @answers = @question.answers.order(:created_at)
   end
 
   def new
@@ -18,9 +20,23 @@ class QuestionsController < ApplicationController
       redirect_to @question, notice: "Qusssesin successfully submitted!"
     else
       require "pry-rails"
-  
+
       @errors = @question.errors.full_messages
       render :new
+    end
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    respond_to do |format|
+      if @question.update(question_params)
+        format.html { redirect to @question, notice: 'Question was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
     end
   end
 
