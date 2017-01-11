@@ -18,6 +18,18 @@ class AnswersController < ApplicationController
     end
   end
 
+  def update
+    
+    @answer = Answer.find(params[:id])
+    if params[:score] == "Upvote"
+      score = @answer.score + 1
+    else
+      score = @answer.score - 1
+    end
+    @answer.update(score: score)
+    redirect_to @answer.question
+  end
+
   private
   def answer_params
     params.require(:answer).permit(:description, :question_id, :user_id)

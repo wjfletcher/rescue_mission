@@ -26,7 +26,10 @@
 
 <h3>Answer?s</h3>
 <% @answers.each do |answer| %>
-  <p><%= answer.description %></p>
+  <p><%= answer.score %> - <%= answer.description %></p>
+  <%= button_to "Upvote", question_answer_path(@question, answer), method: :patch, params: {score: "Upvote"} %>
+  <%= button_to "Downvote", question_answer_path(@question, answer), method: :patch, params: {score: "Downvote"} %>
+
 <% end %>
 
 <%= link_to "Question list", questions_path %>
