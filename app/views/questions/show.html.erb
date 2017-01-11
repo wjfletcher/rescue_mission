@@ -5,6 +5,7 @@
 <p><%= @question.description %></p>
 
 <%= link_to "Edit question", edit_question_path(@question) %>
+<%= link_to 'Delete This Y\'all', @question, method: :delete %>
 
 <h3>Submit Answer</h3>
 <%= form_for [@question, @answer] do |f| %>
@@ -14,7 +15,6 @@
 
   <%= f.label :user_id %>
   <%= f.number_field :user_id, min: 1 %>
-  <%= f.hidden_field(:question_id, value: @question.id) %>
   <%= f.submit "Add answer" %>
 <% end %>
 

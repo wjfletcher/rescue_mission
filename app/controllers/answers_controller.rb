@@ -3,6 +3,9 @@ class AnswersController < ApplicationController
   def create
     @answer = Answer.new(answer_params)
 
+    @question = Question.find(params[:question_id])
+    @answer.question = @question
+
     if @answer.save
       redirect_to @answer.question, notice: "Anser successfully submitted!"
     else

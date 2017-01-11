@@ -18,4 +18,14 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
+  <div class="actions">
+    <%= link_to 'Delete this Quiosshen', @question, method: :delete %>
+  </div>
+<% end %>
+
+<% if @errors %>
+  <% @errors.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
 <% end %>
