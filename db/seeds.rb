@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-user = User.create!(username: 'Tom1995')
+user = User.find(1)
 title_text = ""
 50.times do
   title_text += "c"
@@ -16,6 +16,9 @@ description_text = ""
   description_text += "ba"
 end
 
-10.times do
-  Question.create!(title: title_text, description: description_text, user: user)
+3.times do
+  question = Question.create!(title: title_text, description: description_text, user_id: user.id)
+  3.times do
+    question.answers.create!(description: title_text, user_id: user.id)
+  end
 end

@@ -10,11 +10,17 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    if user_signed_in?
+      @question = Question.new
+    else
+      redirect_to questions_path, notice: "Please Sign In To Submit Your Queshun"
+    end
   end
 
   def create
     @question = Question.new(question_params)
+
+    @question.user_id = current_user.id
 
     if @question.save
       redirect_to @question, notice: "Qusssesin successfully submitted!"
@@ -51,6 +57,6 @@ class QuestionsController < ApplicationController
 
   private
   def question_params
-    params.require(:question).permit(:title, :description, :user_id)
+    params.require(:question).permit(:title, :description)
   end
 end
